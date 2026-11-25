@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_instructions1.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kal-bagh <kal-bagh@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kal-bagh <kal-bagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/09 01:13:17 by kal-bagh          #+#    #+#             */
-/*   Updated: 2026/11/21 16:40:28 by kal-bagh         ###   ########.fr       */
+/*   Updated: 2026/11/25 13:10:19 by kal-bagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,16 @@ void rra(t_stack **a)
 void rrb(t_stack **b)
 {
     reverse_rotate(b);
+}
+
+void	rr(t_stack **a, t_stack **b)
+{
+	ra(a);
+	rb(b);
+}
+
+void	rrr(t_stack **a, t_stack **b)
+{
+	rra(a);
+	rrb(b);
 }

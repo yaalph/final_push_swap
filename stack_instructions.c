@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_instructions.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kal-bagh <kal-bagh@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kal-bagh <kal-bagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/09 01:12:46 by kal-bagh          #+#    #+#             */
-/*   Updated: 2026/11/21 16:46:46 by kal-bagh         ###   ########.fr       */
+/*   Updated: 2026/11/25 19:14:54 by kal-bagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,4 @@ void	rb(t_stack **b)
 	first->next = NULL;
 }
 
-void	rr(t_stack **a, t_stack **b)
-{
-	ra(a);
-	rb(b);
-}
+

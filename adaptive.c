@@ -1,22 +1,22 @@
 
 #include "pushswap.h"
 
-char *adaptive_algo(t_stack** stacka, t_stack** stackb, int size, stack_ops* my_ops)
+char *adaptive_algo(t_everything *everything)
 {
-    if (!stacka || !stackb || !(*stacka))
+    if (!everything->a || !everything->b || !(*everything->a))
         return NULL;
 
-    double s_disorder = count_inversions_of_stack(stacka);
+    double s_disorder = count_inversions_of_stack(everything->a);
 
     if ((s_disorder * 100) < 20){
-        simple_algo(stacka, stackb, size, my_ops);
+        selection_sort(everything);
         return "simple";
     }
     else if ((s_disorder * 100) >= 20 && (s_disorder * 100) < 50){
-        sort_stack(stacka, stackb, size, my_ops);
+        chunk_based(everything);
         return "medium";
     }
     else
-        radix_sort(stacka, stackb);
+        radix_sort(everything);
     return "complex";
 }

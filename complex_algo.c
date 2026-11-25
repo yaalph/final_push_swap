@@ -6,13 +6,30 @@
 /*   By: kal-bagh <kal-bagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/18 04:22:44 by kal-bagh          #+#    #+#             */
-/*   Updated: 2026/11/24 21:55:10 by kal-bagh         ###   ########.fr       */
+/*   Updated: 2026/11/25 20:40:38 by kal-bagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
 
+int top_ascending(t_stack *a, int n){
+	while(--n){
+		if(a->rank > a->next->rank)
+			return 0;
+		a = a->next;
+	}
+	return 1;
+}
+
+int top_descending(t_stack *b, int n){
+	while(--n){
+		if(b->rank < b->next->rank)
+			return 0;
+		b = b->next;
+	}
+	return 1;
+}
 
 void	ops_adding_helper(t_everything *everything, char *opr)
 {
@@ -31,28 +48,20 @@ void	ops_adding_helper(t_everything *everything, char *opr)
 
 void	sort_a(int n, unsigned int mask, t_everything *everything);
 
+
 void	sort_b_base_cases(t_everything *everything, int n)
 {
 	if (n <= 0)
 		return ;
-	if (n == 1)
+	if (n == 2 && (*everything->b)->rank < ((*everything->b)->next)->rank)
 	{
-		pa(everything->a, everything->b);
-		ops_adding_helper(everything, "pa");
-		return ;
+		sb(everything->b);
+		ops_adding_helper(everything, "sb");
 	}
-	if (n == 2)
+	while (n--)
 	{
-		if ((*everything->b)->rank < ((*everything->b)->next)->rank)
-		{
-			sb(everything->b);
-			ops_adding_helper(everything, "sb");
-		}
 		pa(everything->a, everything->b);
 		ops_adding_helper(everything, "pa");
-		pa(everything->a, everything->b);
-		ops_adding_helper(everything, "pa");
-		return ;
 	}
 }
 
@@ -83,7 +92,7 @@ void	sort_b(int n, unsigned int mask, t_everything *everything)
 	zeroes = 0;
 	ones = 0;
 	all = 0;
-	if (n <= 2)
+	if (n <= 2 || top_descending(*(everything->b), n))
 		return (sort_b_base_cases(everything, n));
 	if (n == ft_lstcount(*everything->b))
 		all = 1;
@@ -141,7 +150,7 @@ void	sort_a(int n, unsigned int mask, t_everything *everything)
 	zeroes = 0;
 	ones = 0;
 	all = 0;
-	if (n <= 2)
+	if (n <= 2 || top_ascending(*(everything->a), n))
 		return (sort_a_base_cases(everything, n));
 	if (n == ft_lstcount(*everything->a))
 		all = 1;
@@ -155,13 +164,6 @@ void	sort_a(int n, unsigned int mask, t_everything *everything)
 	}
 	sort_a(ones, mask >> 1, everything);
 	sort_b(zeroes, mask >> 1, everything);
-}
-
-void	ft_putstr(char *s)
-{
-	while (*s)
-		write(1, s++, 1);
-	write(1, "\n", 1);
 }
 
 int	ft_strcmp(const char *s1, const char *s2)
@@ -218,16 +220,83 @@ void add_opcount(t_everything *everything, char *opr)
     (everything->opcount).total++;
 }
 
+void ft_putstr_nl(char *s){
+	write(1, s, ft_strlen(s));
+	write(1, "\n", 1);
+}
+
 void optimise_ops_helper(t_everything *everything){
 	if (!everything->ops)
 		return ;
 	if (!everything->ops->next)
 	{
-		ft_putstr(everything->ops->op);
+		ft_putstr_nl(everything->ops->op);
         add_opcount(everything, everything->ops->op);
 		return ;
 	}
 }
+
+
+
+// int	pair(char *x, char *y, char *p, char *q)
+// {
+// 	return ((!ft_strcmp(x, p) && !ft_strcmp(y, q))
+// 		|| (!ft_strcmp(x, q) && !ft_strcmp(y, p)));
+// }
+
+// int	opposites(char *x, char *y)
+// {
+// 	return (pair(x, y, "pa", "pb") || pair(x, y, "ra", "rra")
+// 		|| pair(x, y, "rb", "rrb") || (!ft_strcmp(x, "sa")
+// 			&& !ft_strcmp(y, "sa")) || (!ft_strcmp(x, "sb")
+// 			&& !ft_strcmp(y, "sb")));
+// }
+// void	ops_lst_addback(t_operation **lst, t_operation *new)
+// {
+// 	t_operation	*tmp;
+
+// 	if (!lst || !new)
+// 		return ;
+// 	if (!*lst)
+// 	{
+// 		*lst = new;
+// 		return ;
+// 	}
+// 	tmp = *lst;
+// 	while (tmp->next)
+// 		tmp = tmp->next;
+// 	tmp->next = new;
+// }
+
+
+// t_operation	*ops_lstnew(char *op)
+// {
+// 	t_operation	*new;
+
+// 	new = malloc(sizeof(t_operation));
+// 	if (!new)
+// 		return (NULL);
+// 	new->op = op;
+// 	new->next = NULL;
+// 	return (new);
+// }
+
+// t_operation *cancel_ops(t_operation *ops){
+// 	t_operation *new;
+// 	new = NULL;
+// 	t_operation *tmp;
+// 	t_operation *atmp;
+// 	while(ops && ops->next){
+// 		if(!opposites(ops->op, ops->next->op)){
+// 			tmp = ops_lstnew(ops->op);
+// 			ops_lst_addback(&new, tmp);
+// 			atmp = ops->next;
+// 			free(ops);
+// 		}
+// 	}
+// }
+
+
 
 void	optimise_ops(t_everything *everything)
 {
@@ -237,6 +306,11 @@ void	optimise_ops(t_everything *everything)
 	if (!everything->ops || !everything->ops->next)
 		return optimise_ops_helper(everything);
 
+
+
+	
+
+		
 	current = everything->ops;
 	while (current)
 	{
@@ -245,13 +319,13 @@ void	optimise_ops(t_everything *everything)
 			m = merge(current->op, current->next->op);
 		if (m)
 		{
-			ft_putstr(m);
+			ft_putstr_nl(m);
 			add_opcount(everything, m);
 			current = current->next->next;
 		}
 		else
 		{
-			ft_putstr(current->op);
+			ft_putstr_nl(current->op);
 			add_opcount(everything, current->op);
 			current = current->next;
 		}
@@ -279,6 +353,7 @@ void	assign_ranks(t_stack *s)
 		i = i->next;
 	}
 }
+
 
 void	radix_sort(t_everything *everything)
 {

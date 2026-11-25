@@ -26,23 +26,6 @@ int square_root(int count){
     return x;    
 }
 
-void assign_ranks(t_stack *s){
-    t_stack *i = s;
-    int r;
-    t_stack *j;
-    while(i){
-        j = s;
-        r = 0;
-        while(j){
-            if(j->value < i->value)
-                r++;
-            j = j->next;
-        }
-        i->rank = r;
-        i = i->next;
-    }
-}
-
 int in_chunk(int chunk, int elems, int rank, int n_chunks){
     if(chunk == n_chunks - 1)
         return rank >= elems * chunk;

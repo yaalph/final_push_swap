@@ -6,7 +6,7 @@
 /*   By: kal-bagh <kal-bagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/24 20:01:28 by kal-bagh          #+#    #+#             */
-/*   Updated: 2026/11/24 20:03:13 by kal-bagh         ###   ########.fr       */
+/*   Updated: 2026/11/25 13:12:18 by kal-bagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void del_ops(t_operation **ops)
 }
 
 
-static void del_stack(t_stack **s)
+void del_stack(t_stack **s)
 {
 	t_stack	*tmp;
 

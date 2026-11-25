@@ -14,18 +14,22 @@
 #include "pushswap.h"
 
 int main(int ac, char **av){
-    t_everything everything;
-    everything = (t_everything){0};
-    // ft_print_list(a);
-    // ft_print_list(b);
-    // radix_sort(&a, &b);
-    
-    // ft_print_list(a);
-    // ft_print_list(b);
+	t_everything	everything;
+	t_stack			*a;
+	t_stack			*b;
 
-
+	(void)ac;
+	a = NULL;
+	b = NULL;
+	everything = (t_everything){0};
+	everything.a = &a;
+	everything.b = &b;
+	parser(av, &everything);
+    printf("\n-----------------\nlist a after being sorted:\nfirst node:\n");
+    ft_print_list(*(everything.a));
 	del_ops(&everything.ops);
-	del_stack(&everything.a);
-	del_stack(&everything.b);
-
+	del_stack(everything.a);
+	del_stack(everything.b);
+	return (0);
 }
+
