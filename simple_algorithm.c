@@ -12,28 +12,27 @@
 
 #include "pushswap.h"
 
+void	selection_sort(t_everything *everything)
+{
+	printf("simple algo was called\n");
 
-void selection_sort(t_everything *everything){
+	// if(!a || !*a || !b)
+	//     return ;
+	// t_stack *sa;
+	// t_stack *min;
+	// while(*a){
+	//     sa = *a;
+	//     min = *a;
+	//     while(sa){
+	//         if(sa->value < min->value)
+	//             min = sa;
+	//         sa = sa->next;
+	//     }
+	//     while(min != *a)
+	//         r_a_or_b(a, 'a', 0);
+	//     p_a_or_b(b, a, 'a');
+	// }
 
-    printf("simple algo was called\n");
-
-    // if(!a || !*a || !b)
-    //     return;
-    // t_stack *sa;
-    // t_stack *min;
-    // while(*a){
-    //     sa = *a;
-    //     min = *a;
-    //     while(sa){
-    //         if(sa->value < min->value)
-    //             min = sa;
-    //         sa = sa->next;
-    //     }
-    //     while(min != *a)
-    //         r_a_or_b(a, 'a', 0);
-    //     p_a_or_b(b, a, 'a');
-    // }
-
-    // while(*b)
-    //     p_a_or_b(a, b, 'b');
+	// while(*b)
+	//     p_a_or_b(a, b, 'b');
 }

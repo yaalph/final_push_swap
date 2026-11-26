@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "pushswap.h"
 
-int main(int ac, char **av){
+int	main(int ac, char **av)
+{
 	t_everything	everything;
 	t_stack			*a;
 	t_stack			*b;
@@ -25,11 +25,8 @@ int main(int ac, char **av){
 	everything.a = &a;
 	everything.b = &b;
 	parser(av, &everything);
-    printf("\n-----------------\nlist a after being sorted:\nfirst node:\n");
-    ft_print_list(*(everything.a));
 	del_ops(&everything.ops);
 	del_stack(everything.a);
 	del_stack(everything.b);
 	return (0);
 }
-

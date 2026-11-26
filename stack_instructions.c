@@ -20,7 +20,7 @@ void	sa(t_stack **a)
 		return ;
 	tmp = *a;
 	*a = (*a)->next;
-    tmp->next = (*a)->next;
+	tmp->next = (*a)->next;
 	(*a)->next = tmp;
 }
 
@@ -32,15 +32,14 @@ void	sb(t_stack **b)
 		return ;
 	tmp = *b;
 	*b = (*b)->next;
-    tmp->next = (*b)->next;
+	tmp->next = (*b)->next;
 	(*b)->next = tmp;
 }
 
 void	ss(t_stack **a, t_stack **b)
 {
-	if ((!a || !*a || !(*a)->next)
-    	&& (!b || !*b || !(*b)->next))
-		return;
+	if ((!a || !*a || !(*a)->next) && (!b || !*b || !(*b)->next))
+		return ;
 	sa(a);
 	sb(b);
 }
@@ -49,26 +48,24 @@ void	pa(t_stack **a, t_stack **b)
 {
 	t_stack	*tmp;
 
-
 	if (!a || !b || !*b)
 		return ;
-    tmp = *b;
-    *b = (*b)->next;
-    tmp->next = *a;
-    *a = tmp;
+	tmp = *b;
+	*b = (*b)->next;
+	tmp->next = *a;
+	*a = tmp;
 }
 
 void	pb(t_stack **a, t_stack **b)
 {
 	t_stack	*tmp;
 
-
 	if (!b || !a || !*a)
 		return ;
-    tmp = *a;
-    *a = (*a)->next;
-    tmp->next = *b;
-    *b = tmp;
+	tmp = *a;
+	*a = (*a)->next;
+	tmp->next = *b;
+	*b = tmp;
 }
 
 void	ra(t_stack **a)
@@ -94,5 +91,3 @@ void	rb(t_stack **b)
 	ft_lstlast(*b)->next = first;
 	first->next = NULL;
 }
-
-

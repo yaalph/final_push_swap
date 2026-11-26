@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kal-bagh <kal-bagh@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/11/26 11:44:01 by kal-bagh          #+#    #+#             */
+/*   Updated: 2026/11/26 11:44:02 by kal-bagh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "pushswap.h"
 
@@ -20,7 +31,6 @@ void	ft_lst_addback(t_stack **lst, t_stack *new)
 	new->index = tmp->index + 1;
 }
 
-
 t_stack	*ft_lstnew(int value)
 {
 	t_stack	*new;
@@ -33,27 +43,27 @@ t_stack	*ft_lstnew(int value)
 	return (new);
 }
 
-int	ft_atoi(const char *str)
-{
-	int	i;
-	int	neg;
-	int	res;
+// int	ft_atoi(const char *str)
+// {
+// 	int	i;
+// 	int	neg;
+// 	int	res;
 
-	i = 0;
-	while (str[i] && ((str[i] >= 9 && str[i] <= 13) || str[i] == ' '))
-		i++;
-	neg = 1;
-	if (str[i] && (str[i] == '+' || str[i] == '-'))
-	{
-		if (str[i] == '-')
-			neg *= -1;
-		i++;
-	}
-	res = 0;
-	while (str[i] && (str[i] >= '0' && str[i] <= '9'))
-		res = res * 10 + (str[i++] - '0');
-	return (res * neg);
-}
+// 	i = 0;
+// 	while (str[i] && ((str[i] >= 9 && str[i] <= 13) || str[i] == ' '))
+// 		i++;
+// 	neg = 1;
+// 	if (str[i] && (str[i] == '+' || str[i] == '-'))
+// 	{
+// 		if (str[i] == '-')
+// 			neg *= -1;
+// 		i++;
+// 	}
+// 	res = 0;
+// 	while (str[i] && (str[i] >= '0' && str[i] <= '9'))
+// 		res = res * 10 + (str[i++] - '0');
+// 	return (res * neg);
+// }
 
 void	ft_print_list(t_stack *lst)
 {
@@ -77,7 +87,6 @@ int	ft_lstcount(t_stack *lst)
 	}
 	return (count);
 }
-
 
 t_stack	*ft_lstlast(t_stack *lst)
 {

@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kal-bagh <kal-bagh@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kal-bagh <kal-bagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 07:20:22 by kal-bagh          #+#    #+#             */
-/*   Updated: 2026/11/22 07:37:47 by kal-bagh         ###   ########.fr       */
+/*   Updated: 2026/11/26 11:45:15 by kal-bagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "pushswap.h"
 
@@ -23,27 +21,6 @@ int	ft_issep(char *charset, char c)
 		charset++;
 	}
 	return (0);
-}
-
-static size_t	count_words(char const *s, char *charset, size_t end)
-{
-	size_t	cnt;
-	size_t	i;
-
-	cnt = 1;
-	i = 0;
-	while (i <= end && s[i])
-	{
-		if (ft_issep(charset, s[i]))
-		{
-			cnt++;
-			while (i <= end && s[i] && ft_issep(charset, s[i]))
-				i++;
-		}
-		else
-			i++;
-	}
-	return (cnt);
 }
 
 static void	*skip_leading_trailing_seps(char const **s, size_t *end,

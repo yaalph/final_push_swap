@@ -6,84 +6,100 @@
 /*   By: kal-bagh <kal-bagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/12 18:07:42 by kal-bagh          #+#    #+#             */
-/*   Updated: 2026/11/17 09:17:52 by kal-bagh         ###   ########.fr       */
+/*   Updated: 2026/11/26 11:44:15 by kal-bagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "pushswap.h"
 
-int square_root(int count){
+int	square_root(int count)
+{
+	int	x;
 
-    if(count == 1)
-        return 1;
-
-    int x = 2;
-    while(x < count / x)
-        x++;
-    if(x != count / x)
-        x--;
-    return x;    
+	if (count == 1)
+		return (1);
+	x = 2;
+	while (x < count / x)
+		x++;
+	if (x != count / x)
+		x--;
+	return (x);
 }
 
-int in_chunk(int chunk, int elems, int rank, int n_chunks){
-    if(chunk == n_chunks - 1)
-        return rank >= elems * chunk;
-    return rank < elems * (chunk + 1) && rank >= elems * chunk;
+int	in_chunk(int chunk, int elems, int rank, int n_chunks)
+{
+	if (chunk == n_chunks - 1)
+		return (rank >= elems * chunk);
+	return (rank < elems * (chunk + 1) && rank >= elems * chunk);
 }
 
-void chunking(t_stack **a, t_stack **b){
-    int n_chunks = square_root(ft_lstcount(*a));
-    int nodes = ft_lstcount(*a);
-    int elems = nodes / n_chunks;
-    int i = 0;
-    int j = 0;
-    int scanned = 0;
-    while(*a){
-        i = 0;
-        scanned = 0;
-        nodes = ft_lstcount(*a);
-        while(*a && scanned++ < nodes && ((i < elems && j < n_chunks - 1) || j == n_chunks - 1)){
-            if(in_chunk(j, elems, (*a)->rank, n_chunks)){
-                (*a)->chunk = j;
-                pb(a, b);
-                i++;
-            }
-            else
-                ra(a);
-        }
-        j++;
-    }
+void	chunking(t_stack **a, t_stack **b)
+{
+	int	n_chunks;
+	int	nodes;
+	int	elems;
+	int	i;
+	int	j;
+	int	scanned;
+
+	n_chunks = square_root(ft_lstcount(*a));
+	nodes = ft_lstcount(*a);
+	elems = nodes / n_chunks;
+	i = 0;
+	j = 0;
+	scanned = 0;
+	while (*a)
+	{
+		i = 0;
+		scanned = 0;
+		nodes = ft_lstcount(*a);
+		while (*a && scanned++ < nodes && ((i < elems && j < n_chunks - 1)
+				|| j == n_chunks - 1))
+		{
+			if (in_chunk(j, elems, (*a)->rank, n_chunks))
+			{
+				(*a)->chunk = j;
+				pb(a, b);
+				i++;
+			}
+			else
+				ra(a);
+		}
+		j++;
+	}
 }
 
+t_stack	*retrieve_max(t_stack *s, int chunk)
+{
+	t_stack	*max;
 
-t_stack *retrieve_max(t_stack *s, int chunk){
-    t_stack *max = NULL;
-    while(s){
-        if(s->chunk == chunk && (max == NULL || s->value > max->value))
-            max = s;
-        s = s->next;
-    }
-    return max;
+	max = NULL;
+	while (s)
+	{
+		if (s->chunk == chunk && (max == NULL || s->value > max->value))
+			max = s;
+		s = s->next;
+	}
+	return (max);
 }
 
+void	chunk_based(t_everything *everything)
+{
+	printf("medium algo was called\n");
+	// assign_ranks(*a);
+	// chunking(a, b);
+	// t_stack *max;
+	// int x;
 
-void chunk_based(t_everything *everything){
-    printf("medium algo was called\n");
-    // assign_ranks(*a);
-    // chunking(a, b);
-    // t_stack *max;
-    // int x;
-
-    // while(*b){
-    //     max = retrieve_max(*b, (*b)->chunk);
-    //     x = 0;
-    //     while(*b != max){
-    //         rb(b);
-    //         x++;
-    //     }
-    //     pa(a, b);
-    //     while(x--)
-    //         rrb(b);
-    // }
+	// while(*b){
+	//     max = retrieve_max(*b, (*b)->chunk);
+	//     x = 0;
+	//     while(*b != max){
+	//         rb(b);
+	//         x++;
+	//     }
+	//     pa(a, b);
+	//     while(x--)
+	//         rrb(b);
+	// }
 }
